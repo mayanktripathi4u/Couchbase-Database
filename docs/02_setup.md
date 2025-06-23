@@ -78,3 +78,24 @@ Then rerun the query above.
 ![N1QL](image-4.png)
 
 
+## 🛑 To Stop the Couchbase Container:
+Once you're done using Couchbase, it's safe and recommended to stop the container — otherwise, it will keep consuming memory and CPU in the background.
+
+```bash
+docker stop couchbase
+```
+✅ This pauses the container but doesn't delete it. You can restart it later.
+
+▶️ To Start It Again Later:
+```bash
+docker start couchbase
+```
+
+❌ To Remove the Container Completely (only if needed):
+```bash
+docker rm -f couchbase
+```
+But be careful: this deletes all data and config unless you mounted volumes (which we haven't done yet).
+
+Optionally, we could persist data using Docker Volumes, and also could have Bash Script to start / stop Couchbase easily.
+
