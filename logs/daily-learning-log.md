@@ -19,7 +19,9 @@ docker run -d --name couchbase \
   * Open http://localhost:8091 in your browser
   * Goal: Access Couchbase Web UI, understand what Buckets, Scopes, and Collections are.
 
-2️⃣ Summary of What I Complete Today:
+2️⃣ Concepts like Bucket, VBucket, Compression.
+
+3️⃣ Summary of What I Complete Today:
 
 |Task|	Status|
 |--|--|
@@ -29,4 +31,5 @@ docker run -d --name couchbase \
 |🧾 Add a document manually	|✅|
 |🔍 Run a simple N1QL query	|✅|
 |📝 Save logs and notes in GitHub	|✅|
+|Concepts|✅|
 
