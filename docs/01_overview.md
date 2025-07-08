@@ -167,3 +167,63 @@ Understanding Couchbase’s features will give us clarity on how it's built for 
 | 📥 **Flexible Indexing**                | Supports primary, secondary, array, and full-text search indexes for fast query performance.                        |
 
 
+# Bucket
+- Bucket is logical structure on the cluster.
+- Each bucket has 1024 vBuckets (Shards)
+- Data spread evenly acorss the cluster (with rebalance).
+- Each key is mapped to a vBucket on a node.
+- Types of Bucket:
+  - Couchbase
+  - Memcached
+  - Ephemeral
+- Memory Quota: Define Memory Quota in MB per server node. Once defined say as 100 MB, it will get multipled with the count of Nodes with Data Services.
+
+## Add a Bucket (From Web-UI)
+- Name: a unique name for a bucket.
+- Memory Quota
+- Bucket Type
+- Replicas
+  - Enable with "n" number of replica (backup) copies. Note these are count of copies. If set 1 then there will be one main and one backup copy. When set Replicas as 2, it will be total of 3 sets (one main and 2 rbackup copy). Its recommended to have one Replica when you have 3 nodes in your COuchbase Cluster. When you have 5 Nodes in your CLuster then go with 2 Replicas, and if you have more than 5 nodes in your cluster than go with 3 replicas.
+  
+  - Replicate view indexes.
+-  Bucket Max Time-To-Live
+   -  Enable it with 60 seconds
+-  Compression Mode
+   -  Off => Compressed documents are accepted but actively decompressed for storage in memory and for streaming. Not advised.
+   -  Passive => Compressed documents can be stored and streamed from the server, but the server does not try to actively compress documents (Client-Initiated).
+   -  Active => The server will try to actively compress documents in memory.
+-  Conflict Resolution: Is used when using XCDR. 
+   -  Sequence Number
+   -  Timestamp
+   Choose the `timestamp` conflict resolution method if XCDR replications will be set up for this bucket. Attention: `timestamp` conflict resolution requires additional NTP setup.
+
+-  Ejection Method
+   -  Value-only: During ejection, only the value will be ejected (key and metadata will remain in memory). This needs more system memory. But provides the best performance.
+   -  Full: During ejection. everything (inclduing key, metadata and value) will be ejected. It reduces the memory iverhead requirement.
+
+-  Bucket Priority
+    This allows tasks to be handled based on priority. The effect is relative between buckets. If all buckets are set to "high" then no bucket will have priority over another.
+   -  Default: 
+   -  High: 
+-  Auto-Compaction
+   -  Override the default auto-compaction settings
+-  Flush
+   -  Enable
+-  
+
+## Add Bucket (Using CLI)
+For this navigate to Terminal (on installed machive or VM)
+```bash
+couchbase-cli bucket-create -c 192.168.0.1:8091 \
+--username Administrator \
+--password password \
+--bucket my-bucket \
+--bucket-type couchbase \
+--bucket-ramsize 512 \
+--bucket-replica 2 \
+--bucket-priority high \
+--bucket-eviction-policy fullEviction \
+--enable-flush 1 \
+--enable-index-replica 1
+```
+

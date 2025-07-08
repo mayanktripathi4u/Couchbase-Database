@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+requests
+hl7apy
+streamlit
+

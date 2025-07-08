@@ -46,5 +46,6 @@ Couchbase is a NoSQL database, designed primarily for high performance, scalabil
 
 
 # References
-[Overview](./docs/01_overview.md)
-[Setup](./docs/02_setup.md)
+1. [Overview](./docs/01_overview.md)
+2. [Setup - Docker](./docs/02_setup.md#couchbase-in-a-docker)
+3. 
